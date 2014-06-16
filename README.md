@@ -35,6 +35,10 @@ run `make ctest`.
 
 `make perf` will run performance tests.
 
+Unexpected code patterns were based on performance testing in node and browser:
+
+- [Loop unrolling helps!](http://jsperf.com/crc32-table/2)
+
 ## In the future ... 
 
 - Specifying an arbitrary initial CRC value
