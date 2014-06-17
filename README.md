@@ -50,7 +50,7 @@ Unexpected code patterns were based on performance testing in node and browser:
 Please consult the attached LICENSE file for details.  All rights not explicitly
 granted by the Apache 2.0 license are reserved by the Original Author.
 
-[![Build Status](https://travis-ci.org/SheetJS/js-crc32.png?branch=master)](https://travis-ci.org/SheetJS/js-crc32)
+[![Build Status](https://travis-ci.org/SheetJS/js-crc32.svg?branch=master)](https://travis-ci.org/SheetJS/js-crc32)
 
 [![Coverage Status](https://coveralls.io/repos/SheetJS/js-crc32/badge.png?branch=master)](https://coveralls.io/r/SheetJS/js-crc32?branch=master)
 
