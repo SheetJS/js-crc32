@@ -51,3 +51,7 @@ coveralls-spin:
 .PHONY: perf
 perf:
 	bash perf/perf.sh
+
+.PHONY: perf-all
+perf-all:
+	bash misc/perf.sh

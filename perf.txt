@@ -1,0 +1,82 @@
+--- binary string (255) ---
+✓ js-crc32     x 25.41 ops/sec ±0.40% (45 runs sampled)
+✓ buffer-crc32 x 6.63 ops/sec ±1.09% (20 runs sampled)
+✓ crc32        x 0.84 ops/sec ±1.17% (6 runs sampled)
+✓ node_crc     x 1.99 ops/sec ±0.59% (8 runs sampled)
+Fastest is js-crc32
+--- buffer (255) ---
+✓ js-crc32     x 30.68 ops/sec ±0.40% (55 runs sampled)
+✓ buffer-crc32 x 26.15 ops/sec ±0.36% (47 runs sampled)
+✓ crc32        x 7.58 ops/sec ±0.61% (22 runs sampled)
+✓ node_crc     x 3.51 ops/sec ±0.56% (12 runs sampled)
+Fastest is js-crc32
+--- unicode string (255) ---
+✓ js-crc32     x 11.65 ops/sec ±0.35% (32 runs sampled)
+✓ buffer-crc32 x 3.17 ops/sec ±4.01% (12 runs sampled)
+Fastest is js-crc32
+--- binary string (1023) ---
+✓ js-crc32     x 65.10 ops/sec ±0.36% (68 runs sampled)
+✓ buffer-crc32 x 25.63 ops/sec ±3.38% (60 runs sampled)
+✓ crc32        x 2.52 ops/sec ±0.65% (10 runs sampled)
+✓ node_crc     x 9.41 ops/sec ±0.55% (27 runs sampled)
+Fastest is js-crc32
+--- buffer (1023) ---
+✓ js-crc32     x 78.58 ops/sec ±0.42% (82 runs sampled)
+✓ buffer-crc32 x 73.15 ops/sec ±0.41% (76 runs sampled)
+✓ crc32        x 21.28 ops/sec ±0.37% (39 runs sampled)
+✓ node_crc     x 12.46 ops/sec ±0.42% (34 runs sampled)
+Fastest is js-crc32
+--- unicode string (1023) ---
+✓ js-crc32     x 29.07 ops/sec ±0.51% (51 runs sampled)
+✓ buffer-crc32 x 9.25 ops/sec ±6.61% (35 runs sampled)
+Fastest is js-crc32
+--- binary string (4095) ---
+✓ js-crc32     x 16.57 ops/sec ±0.47% (44 runs sampled)
+✓ buffer-crc32 x 13.30 ops/sec ±8.05% (34 runs sampled)
+✓ crc32        x 0.60 ops/sec ±0.46% (5 runs sampled)
+✓ node_crc     x 3.01 ops/sec ±0.52% (11 runs sampled)
+Fastest is js-crc32
+--- buffer (4095) ---
+✓ js-crc32     x 20.35 ops/sec ±0.45% (37 runs sampled)
+✓ buffer-crc32 x 18.86 ops/sec ±0.45% (50 runs sampled)
+Fastest is js-crc32
+--- unicode string (4095) ---
+✓ js-crc32     x 7.20 ops/sec ±0.96% (22 runs sampled)
+✓ buffer-crc32 x 4.20 ops/sec ±5.73% (13 runs sampled)
+Fastest is js-crc32
+--- binary string (16383) ---
+✓ js-crc32     x 41.40 ops/sec ±0.15% (55 runs sampled)
+✓ buffer-crc32 x 39.18 ops/sec ±5.86% (63 runs sampled)
+Fastest is js-crc32
+--- buffer (16383) ---
+✓ js-crc32     x 51.36 ops/sec ±0.34% (67 runs sampled)
+✓ buffer-crc32 x 47.72 ops/sec ±0.31% (63 runs sampled)
+Fastest is js-crc32
+--- unicode string (16383) ---
+✓ js-crc32     x 18.47 ops/sec ±0.74% (49 runs sampled)
+✓ buffer-crc32 x 11.29 ops/sec ±3.94% (31 runs sampled)
+Fastest is js-crc32
+--- binary string (65535) ---
+✓ js-crc32     x 10.14 ops/sec ±4.43% (28 runs sampled)
+✓ buffer-crc32 x 7.29 ops/sec ±5.49% (27 runs sampled)
+Fastest is js-crc32
+--- buffer (65535) ---
+✓ js-crc32     x 12.34 ops/sec ±0.26% (34 runs sampled)
+✓ buffer-crc32 x 11.29 ops/sec ±0.56% (32 runs sampled)
+Fastest is js-crc32
+--- unicode string (65535) ---
+✓ js-crc32     x 4.28 ops/sec ±1.17% (14 runs sampled)
+✓ buffer-crc32 x 2.73 ops/sec ±3.73% (10 runs sampled)
+Fastest is js-crc32
+--- binary string (262143) ---
+✓ js-crc32     x 21.41 ops/sec ±3.43% (43 runs sampled)
+✓ buffer-crc32 x 23.56 ops/sec ±4.02% (41 runs sampled)
+Fastest is js-crc32
+--- buffer (262143) ---
+✓ js-crc32     x 31.51 ops/sec ±0.49% (55 runs sampled)
+✓ buffer-crc32 x 27.56 ops/sec ±0.60% (51 runs sampled)
+Fastest is js-crc32
+--- unicode string (262143) ---
+✓ js-crc32     x 11.00 ops/sec ±0.98% (31 runs sampled)
+✓ buffer-crc32 x 6.70 ops/sec ±2.99% (19 runs sampled)
+Fastest is js-crc32

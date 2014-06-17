@@ -1,4 +1,4 @@
-/* ssf.js (C) 2014 SheetJS -- http://sheetjs.com */
+/* bm.js (C) 2014 SheetJS -- http://sheetjs.com */
 var Benchmark = require('benchmark');
 var c = require('ansi')(process.stdout);
 
@@ -12,17 +12,24 @@ function BM(name) {
 	if(!(this instanceof BM)) return new BM(name);
 	console.log("--- " + name + " ---");
 	this.suite = new Benchmark.Suite(name, { onComplete: suite_end });
+	this.suites = [];
+	this.maxlen = 0;
 }
 
-BM.prototype.run = function() { this.suite.run(); };
+BM.prototype.run = function() {
+	var maxlen = this.maxlen, ss = this.suite;
+	this.suites.forEach(function(s) { ss.add(s[0] + new Array(maxlen-s[0].length+1).join(" "), s[1]); });
+	if(this.suites.length > 0) this.suite.run();
+};
 
 BM.prototype.add = function(msg, test) {
-	this.suite.add(msg, {
+	this.suites.push([msg, {
 		onCycle: test_cycle, 
 		onComplete: test_end,
 		defer: false, 
 		fn: test
-	});
+	}]);
+	this.maxlen = Math.max(this.maxlen, msg.length);
 };
 
 module.exports = BM;

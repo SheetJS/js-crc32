@@ -15,7 +15,7 @@ function signed_crc_table() {
 		table[n] = c;
 	}
 
-	return table;
+	return typeof Int32Array !== 'undefined' ? new Int32Array(table) : table;
 }
 
 var table = signed_crc_table();

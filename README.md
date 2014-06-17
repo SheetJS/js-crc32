@@ -33,7 +33,12 @@ run `make ctest`.
 
 ## Performance
 
-`make perf` will run performance tests.
+`make perf` will run algorithmic performance tests (which should justify certain
+decisions in the code).  
+
+`make perf-all` compares the performance of various crc-32 algorithms that
+implement the correct form (note that the SSE intrinsic is designed for the 
+CRC32C checksum and uses a different polynomial).
 
 Unexpected code patterns were based on performance testing in node and browser:
 

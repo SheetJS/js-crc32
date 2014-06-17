@@ -1,17 +1,29 @@
 /* charCodeAt is the best approach for binary strings */
+var use_buffer = typeof Buffer !== 'undefined';
 function crc32_bstr(bstr) {
-	for(var crc = -1, i = 0, L=bstr.length-1; i < L;) {
-		crc = (crc >>> 8) ^ table[(crc ^ bstr.charCodeAt(i++)) & 0xFF];
-		crc = (crc >>> 8) ^ table[(crc ^ bstr.charCodeAt(i++)) & 0xFF];
+	if(bstr.length > 32768) if(use_buffer) return crc32_buf(Buffer(bstr));
+	var crc = -1, L = bstr.length - 1;
+	for(var i = 0; i < L;) {
+		crc =  table[(crc ^ bstr.charCodeAt(i++)) & 0xFF] ^ (crc >>> 8);
+		crc =  table[(crc ^ bstr.charCodeAt(i++)) & 0xFF] ^ (crc >>> 8);
 	}
-	if(i === L) crc = (crc >>> 8) ^ table[(crc ^ bstr.charCodeAt(i++)) & 0xFF];
+	if(i === L) crc = (crc >>> 8) ^ table[(crc ^ bstr.charCodeAt(i)) & 0xFF];
 	return crc ^ -1;
 }
 
 function crc32_buf(buf) {
-	for(var crc = -1, i = 0; i != buf.length; ++i) {
-		crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xFF];
+	for(var crc = -1, i = 0, L=buf.length-3; i < L;) {
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 	}
+	if(i < L+3) {
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		if(i < L+3) {
+			crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+			if(i < L+3) {
+				crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF]; }}}
 	return crc ^ -1;
 }
 
