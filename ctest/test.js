@@ -22,7 +22,7 @@ describe('crc32 bits', function() {
 	bits.forEach(function(i) {
 		var l = i[0].length;
 		var msg = i[0];
-		if(l > 20) i[0].substr(0,5) + "...(" + l + ")..." + i[0].substr(-5);
+		if(l > 20) msg = i[0].substr(0,5) + "...(" + l + ")..." + i[0].substr(-5);
 		it(msg, function() {
 			if(i[2] === 1) assert.equal(X.bstr(i[0]), i[1]|0);
 			assert.equal(X.str(i[0]), i[1]|0);
