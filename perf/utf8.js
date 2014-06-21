@@ -35,10 +35,7 @@ var BM = require('./bm');
 var suite = new BM('unicode string');
 
 var foobar = "foo bar baz٪☃🍣";
-foobar += " " + foobar;
-foobar += " " + foobar;
-foobar += " " + foobar;
-foobar += " " + foobar;
+for(var i = 0; i != 4; ++i) foobar += " " + foobar;
 suite.add('sheetjs 1', function() { for(var j = 0; j != 1000; ++j) sheetjs1(foobar); });
 suite.add('sheetjs 2', function() { for(var j = 0; j != 1000; ++j) sheetjs2(foobar); });
 suite.run()

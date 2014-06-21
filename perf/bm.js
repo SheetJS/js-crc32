@@ -2,7 +2,7 @@
 var Benchmark = require('benchmark');
 var c = require('ansi')(process.stdout);
 
-function test_end() { c.horizontalAbsolute(0).write("✓"); c.write('\n'); }
+function test_end(e) { c.horizontalAbsolute(0).write("✓ "+e.target); c.write('\n'); }
 
 function suite_end() { console.log('Fastest is ' + this.filter('fastest').pluck('name')); } 
 
@@ -16,7 +16,8 @@ function BM(name) {
 	this.maxlen = 0;
 }
 
-BM.prototype.run = function() {
+BM.prototype.run = function(skip) {
+	if(skip) { this.suites.forEach(function(s) { s[1].fn(); }); return; }
 	var maxlen = this.maxlen, ss = this.suite;
 	this.suites.forEach(function(s) { ss.add(s[0] + new Array(maxlen-s[0].length+1).join(" "), s[1]); });
 	if(this.suites.length > 0) this.suite.run();

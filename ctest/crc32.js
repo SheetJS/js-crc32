@@ -2,7 +2,7 @@
 /* vim: set ts=2: */
 var CRC32 = {};
 (function(CRC32) {
-CRC32.version = '0.2.0';
+CRC32.version = '0.2.1';
 /* see perf/crc32table.js */
 function signed_crc_table() {
 	var c, table = new Array(256);
@@ -27,7 +27,7 @@ var table = signed_crc_table();
 /* charCodeAt is the best approach for binary strings */
 var use_buffer = typeof Buffer !== 'undefined';
 function crc32_bstr(bstr) {
-	if(bstr.length > 32768) if(use_buffer) return crc32_buf(Buffer(bstr));
+	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(Buffer(bstr));
 	var crc = -1, L = bstr.length - 1;
 	for(var i = 0; i < L;) {
 		crc =  table[(crc ^ bstr.charCodeAt(i++)) & 0xFF] ^ (crc >>> 8);
@@ -38,18 +38,29 @@ function crc32_bstr(bstr) {
 }
 
 function crc32_buf(buf) {
+	if(buf.length > 10000) return crc32_buf_8(buf);
 	for(var crc = -1, i = 0, L=buf.length-3; i < L;) {
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 	}
-	if(i < L+3) {
+	while(i < L+3) crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+	return crc ^ -1;
+}
+
+function crc32_buf_8(buf) {
+	for(var crc = -1, i = 0, L=buf.length-7; i < L;) {
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
-		if(i < L+3) {
-			crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
-			if(i < L+3) {
-				crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF]; }}}
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
+	}
+	while(i < L+7) crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 	return crc ^ -1;
 }
 

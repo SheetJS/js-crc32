@@ -10,9 +10,9 @@ git_module() {
 }
 
 echo "::: downloading modules"
+npm install crc-32 2>/dev/null
 git_module node-crc https://github.com/alexgorbatchev/node-crc 2>/dev/null # crc
 git_module crc32 https://github.com/beatgammit/crc32 2>/dev/null # crc32
 git_module buffer-crc32 https://github.com/brianloveswords/buffer-crc32 2>/dev/null # buffer-crc32
 
-for i in A B C D E F; do MODE="$i" node integration.js; done
-# for i in E F; do MODE="$i" node integration.js; done
+for i in A B C D E F; do MODE="$i" node integration.js "$1"; done
