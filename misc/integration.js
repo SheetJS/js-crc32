@@ -24,13 +24,16 @@ function u3(str) { return js_crc32_old.str(str); }
 
 var ntests, len_max, do_bstr, do_buf, do_ustr;
 switch(process.env.MODE) {
-	case "A": ntests = 100000; len_max = 256; break;
-	case "B": ntests = 10000; len_max = 1024; break;
-	case "C": ntests = 10000; len_max = 4096; break;
-	case "D": ntests = 1000; len_max = 16384; break;
-	case "E": ntests = 1000; len_max = 65536; break;
-	case "F": ntests = 100; len_max = 262144; break;
-	default:  ntests = 10000; len_max = 1024; break;
+	case "A": ntests = 100000;  len_max = 256; break;
+	case "B": ntests = 10000;  len_max = 1024; break;
+	case "C": ntests = 10000;  len_max = 4096; break;
+	case "D": ntests = 1000;  len_max = 16384; break;
+	case "E": ntests = 1000;  len_max = 65536; break;
+	case "F": ntests = 100;  len_max = 262144; break;
+	case "G": ntests = 100; len_max = 1048576; break;
+	case "H": ntests = 10;  len_max = 4194304; break;
+	case "I": ntests = 10; len_max = 16777216; break;
+	default:  ntests = 10000;  len_max = 1024; break;
 }
 
 if(process.argv === 2) do_bstr = do_buf = do_ustr = true;
