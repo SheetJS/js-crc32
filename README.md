@@ -57,7 +57,7 @@ granted by the Apache 2.0 license are reserved by the Original Author.
 
 [![Build Status](https://travis-ci.org/SheetJS/js-crc32.svg?branch=master)](https://travis-ci.org/SheetJS/js-crc32)
 
-[![Coverage Status](https://coveralls.io/repos/SheetJS/js-crc32/badge.png?branch=master)](https://coveralls.io/r/SheetJS/js-crc32?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/SheetJS/js-crc32/master.svg)](https://coveralls.io/r/SheetJS/js-crc32?branch=master)
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/ee0e89f8b1d5b861ffbf264b8ce329a6 "githalytics.com")](http://githalytics.com/SheetJS/js-crc32)
 
