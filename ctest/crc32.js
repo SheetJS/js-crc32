@@ -2,7 +2,7 @@
 /* vim: set ts=2: */
 var CRC32 = {};
 (function(CRC32) {
-CRC32.version = '0.2.1';
+CRC32.version = '0.2.2';
 /* see perf/crc32table.js */
 function signed_crc_table() {
 	var c, table = new Array(256);
