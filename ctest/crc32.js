@@ -1,7 +1,23 @@
-/* crc32.js (C) 2014 SheetJS -- http://sheetjs.com */
+/* crc32.js (C) 2014-2015 SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
-var CRC32 = {};
-(function(CRC32) {
+var CRC32;
+(function (factory) {
+	if(typeof DO_NOT_EXPORT_CRC === 'undefined') {
+		if('object' === typeof exports) {
+			factory(exports);
+		} else if ('function' === typeof define && define.amd) {
+			define(function () {
+				var module = {};
+				factory(module);
+				return module;
+			});
+		} else {
+		  factory(CRC32 = {});
+		}
+	} else {
+		factory(CRC32 = {});
+	}
+}(function(CRC32) {
 CRC32.version = '0.3.0';
 /* see perf/crc32table.js */
 function signed_crc_table() {
@@ -91,4 +107,4 @@ CRC32.table = table;
 CRC32.bstr = crc32_bstr;
 CRC32.buf = crc32_buf;
 CRC32.str = crc32_str;
-})(typeof exports !== "undefined" && typeof DO_NOT_EXPORT_CRC === 'undefined' ? exports : CRC32);
+}));
