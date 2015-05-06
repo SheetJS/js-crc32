@@ -1,7 +1,7 @@
 /* charCodeAt is the best approach for binary strings */
 var use_buffer = typeof Buffer !== 'undefined';
-function crc32_bstr(bstr) {
-	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(Buffer(bstr));
+function crc32_bstr(bstr/*:string*/)/*:CRC32Type*/ {
+	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(new Buffer(bstr));
 	var crc = -1, L = bstr.length - 1;
 	for(var i = 0; i < L;) {
 		crc =  table[(crc ^ bstr.charCodeAt(i++)) & 0xFF] ^ (crc >>> 8);
@@ -11,7 +11,7 @@ function crc32_bstr(bstr) {
 	return crc ^ -1;
 }
 
-function crc32_buf(buf) {
+function crc32_buf(buf/*:ABuf*/)/*:CRC32Type*/ {
 	if(buf.length > 10000) return crc32_buf_8(buf);
 	for(var crc = -1, i = 0, L=buf.length-3; i < L;) {
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
@@ -23,7 +23,7 @@ function crc32_buf(buf) {
 	return crc ^ -1;
 }
 
-function crc32_buf_8(buf) {
+function crc32_buf_8(buf/*:ABuf*/)/*:CRC32Type*/ {
 	for(var crc = -1, i = 0, L=buf.length-7; i < L;) {
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
@@ -39,7 +39,7 @@ function crc32_buf_8(buf) {
 }
 
 /* much much faster to intertwine utf8 and crc */
-function crc32_str(str) {
+function crc32_str(str/*:string*/)/*:CRC32Type*/ {
 	for(var crc = -1, i = 0, L=str.length, c, d; i < L;) {
 		c = str.charCodeAt(i++);
 		if(c < 0x80) {

@@ -2,10 +2,10 @@
 /* vim: set ts=2: */
 var CRC32 = {};
 (function(CRC32) {
-CRC32.version = '0.2.2';
+CRC32.version = '0.3.0';
 /* see perf/crc32table.js */
 function signed_crc_table() {
-	var c, table = new Array(256);
+	var c = 0, table = new Array(256);
 
 	for(var n =0; n != 256; ++n){
 		c = n;
@@ -27,7 +27,7 @@ var table = signed_crc_table();
 /* charCodeAt is the best approach for binary strings */
 var use_buffer = typeof Buffer !== 'undefined';
 function crc32_bstr(bstr) {
-	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(Buffer(bstr));
+	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(new Buffer(bstr));
 	var crc = -1, L = bstr.length - 1;
 	for(var i = 0; i < L;) {
 		crc =  table[(crc ^ bstr.charCodeAt(i++)) & 0xFF] ^ (crc >>> 8);

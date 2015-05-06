@@ -1,6 +1,6 @@
 /* see perf/crc32table.js */
-function signed_crc_table() {
-	var c, table = new Array(256);
+function signed_crc_table()/*:CRC32TableType*/ {
+	var c = 0, table/*:Array<number>*/ = new Array(256);
 
 	for(var n =0; n != 256; ++n){
 		c = n;

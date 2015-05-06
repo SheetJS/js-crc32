@@ -1,15 +1,13 @@
 {
 	"name": "crc-32",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"author": "sheetjs",
 	"description": "Pure-JS CRC-32",
 	"keywords": [ "crc32", "checksum", "crc" ],
 	"main": "./crc32",
 	"devDependencies": {
 		"mocha":"",
-		"xlsjs":"",
-		"uglify-js":"",
-		"codepage":""
+		"uglify-js":""
 	},
 	"repository": { "type":"git", "url":"git://github.com/SheetJS/js-crc32.git" },
 	"scripts": {

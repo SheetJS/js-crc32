@@ -1,11 +1,17 @@
 /* crc32.js (C) 2014 SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
 var CRC32 = {};
+/*:: declare var DO_NOT_EXPORT_CRC: any; */
 (function(CRC32) {
 CRC32.version = '0.3.0';
+/*::
+type CRC32Type = number;
+type ABuf = Array<number> | Buffer;
+type CRC32TableType = Array<number> | Int32Array;
+*/
 /* see perf/crc32table.js */
-function signed_crc_table() {
-	var c = 0, table = new Array(256);
+function signed_crc_table()/*:CRC32TableType*/ {
+	var c = 0, table/*:Array<number>*/ = new Array(256);
 
 	for(var n =0; n != 256; ++n){
 		c = n;
@@ -26,7 +32,7 @@ function signed_crc_table() {
 var table = signed_crc_table();
 /* charCodeAt is the best approach for binary strings */
 var use_buffer = typeof Buffer !== 'undefined';
-function crc32_bstr(bstr) {
+function crc32_bstr(bstr/*:string*/)/*:CRC32Type*/ {
 	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(new Buffer(bstr));
 	var crc = -1, L = bstr.length - 1;
 	for(var i = 0; i < L;) {
@@ -37,7 +43,7 @@ function crc32_bstr(bstr) {
 	return crc ^ -1;
 }
 
-function crc32_buf(buf) {
+function crc32_buf(buf/*:ABuf*/)/*:CRC32Type*/ {
 	if(buf.length > 10000) return crc32_buf_8(buf);
 	for(var crc = -1, i = 0, L=buf.length-3; i < L;) {
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
@@ -49,7 +55,7 @@ function crc32_buf(buf) {
 	return crc ^ -1;
 }
 
-function crc32_buf_8(buf) {
+function crc32_buf_8(buf/*:ABuf*/)/*:CRC32Type*/ {
 	for(var crc = -1, i = 0, L=buf.length-7; i < L;) {
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
 		crc = (crc >>> 8) ^ table[(crc^buf[i++])&0xFF];
@@ -65,7 +71,7 @@ function crc32_buf_8(buf) {
 }
 
 /* much much faster to intertwine utf8 and crc */
-function crc32_str(str) {
+function crc32_str(str/*:string*/)/*:CRC32Type*/ {
 	for(var crc = -1, i = 0, L=str.length, c, d; i < L;) {
 		c = str.charCodeAt(i++);
 		if(c < 0x80) {
