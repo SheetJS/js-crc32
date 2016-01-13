@@ -51,7 +51,7 @@ function crc32_str(str/*:string*/)/*:CRC32Type*/ {
 			c = (c&1023)+64; d = str.charCodeAt(i++) & 1023;
 			crc = (crc >>> 8) ^ table[(crc ^ (240|((c>>8)&7))) & 0xFF];
 			crc = (crc >>> 8) ^ table[(crc ^ (128|((c>>2)&63))) & 0xFF];
-			crc = (crc >>> 8) ^ table[(crc ^ (128|((d>>6)&15)|(c&3))) & 0xFF];
+			crc = (crc >>> 8) ^ table[(crc ^ (128|((d>>6)&15)|((c&3)<<4))) & 0xFF];
 			crc = (crc >>> 8) ^ table[(crc ^ (128|(d&63))) & 0xFF];
 		} else {
 			crc = (crc >>> 8) ^ table[(crc ^ (224|((c>>12)&15))) & 0xFF];

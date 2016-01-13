@@ -1,4 +1,4 @@
-/* crc32.js (C) 2014-2015 SheetJS -- http://sheetjs.com */
+/* crc32.js (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
 var CRC32;
 /*:: declare var DO_NOT_EXPORT_CRC: any; */
@@ -14,13 +14,13 @@ var CRC32;
 				return module;
 			});
 		} else {
-		  factory(CRC32 = {});
+			factory(CRC32 = {});
 		}
 	} else {
 		factory(CRC32 = {});
 	}
 }(function(CRC32) {
-CRC32.version = '0.3.0';
+CRC32.version = '0.4.0';
 /*::
 type CRC32Type = number;
 type ABuf = Array<number> | Buffer;
@@ -100,7 +100,7 @@ function crc32_str(str/*:string*/)/*:CRC32Type*/ {
 			c = (c&1023)+64; d = str.charCodeAt(i++) & 1023;
 			crc = (crc >>> 8) ^ table[(crc ^ (240|((c>>8)&7))) & 0xFF];
 			crc = (crc >>> 8) ^ table[(crc ^ (128|((c>>2)&63))) & 0xFF];
-			crc = (crc >>> 8) ^ table[(crc ^ (128|((d>>6)&15)|(c&3))) & 0xFF];
+			crc = (crc >>> 8) ^ table[(crc ^ (128|((d>>6)&15)|((c&3)<<4))) & 0xFF];
 			crc = (crc >>> 8) ^ table[(crc ^ (128|(d&63))) & 0xFF];
 		} else {
 			crc = (crc >>> 8) ^ table[(crc ^ (224|((c>>12)&15))) & 0xFF];

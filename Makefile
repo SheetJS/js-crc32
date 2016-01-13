@@ -20,11 +20,11 @@ bits/01_version.js: package.json
 	echo "CRC32.version = '"`grep version package.json | awk '{gsub(/[^0-9a-z\.-]/,"",$$2); print $$2}'`"';" > $@
 
 .PHONY: clean
-clean:
+clean: clean-baseline
 	rm -f $(TARGET)
 
 .PHONY: test mocha
-test mocha: test.js
+test mocha: test.js $(TARGET) baseline
 	mocha -R spec -t 20000
 
 .PHONY: ctest
@@ -70,3 +70,10 @@ perf:
 .PHONY: perf-all
 perf-all:
 	bash misc/perf.sh
+
+.PHONY: baseline clean-baseline
+baseline:
+	./misc/make_baseline.sh
+
+clean-baseline:
+	rm -f test_files/*.*

@@ -5,7 +5,10 @@ if(typeof require !== 'undefined') {
 	describe('source',function(){it('should load',function(){X=require('./');});});
 	bits = require('./misc/bits.js');
 	crc32table = require('./misc/table.js');
+	fs = require("fs");
 } else { X = CRC32; }
+
+function readlines(f) { return fs.readFileSync(f, "ascii").split("\n").filter(function(f) { return !!f; }); }
 
 describe('crc32 table', function() {
 	it('should match fixed table', function() {
@@ -30,4 +33,20 @@ describe('crc32 bits', function() {
 		});
 	});
 });
-
+if(typeof require !== 'undefined') describe("unicode", function() {
+	if(!fs.existsSync("./test_files/uccat.txt")) return;;
+	var uccat = readlines("./test_files/uccat.txt");
+	uccat.forEach(function(cat) {
+		it("Category " + cat, function() {
+			if(!fs.existsSync("./test_files/baseline." + cat + ".txt")) return;
+			var corpus = readlines("./test_files/baseline." + cat + ".txt");
+			var uctable = require("./test_files/uctable." + cat + ".js");
+			uctable.forEach(function(c, i) {
+				/* since the baselines are passed via utf8, discard invalid codes */
+				if(c.charCodeAt(0) >= 0xD800 && c.charCodeAt(0) < 0xE000) return;
+				var cc = corpus[i], dd = X.str(c);
+				assert.equal(dd, cc, ":" + i + ":" + c + ":" + cc + ":" + dd);
+			});
+		});
+	});
+});

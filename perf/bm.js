@@ -1,4 +1,4 @@
-/* bm.js (C) 2014 SheetJS -- http://sheetjs.com */
+/* bm.js (C) 2014-present SheetJS -- http://sheetjs.com */
 var Benchmark = require('benchmark');
 var c = require('ansi')(process.stdout);
 

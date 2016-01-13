@@ -51,6 +51,9 @@ For example:
 To run the in-browser tests, run a local server and go to the `ctest` directory.
 To update the browser artifacts, run `make ctest`.
 
+`make baseline` will generate baseline files based on the unicode mapping at
+<http://mathias.html5.org>
+
 ## License
 
 Please consult the attached LICENSE file for details.  All rights not explicitly
