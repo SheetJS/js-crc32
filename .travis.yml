@@ -1,16 +1,17 @@
 language: node_js
 node_js:
-  - "5.0"
-  - "4.2"
+  - "6"
+  - "5"
+  - "4"
   - "0.12"
   - "0.10"
   - "0.8"
 before_install:
   - "npm install -g npm@next"
-  - "npm install -g mocha crc-32 benchmark ansi"
+  - "npm install -g mocha"
   - "npm install codepage"
   - "npm install blanket"
   - "npm install coveralls mocha-lcov-reporter"
 after_success:
   - "make coveralls-spin"
-  - "make perf-all"
+#  - "make perf-all"

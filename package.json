@@ -1,14 +1,20 @@
 {
 	"name": "crc-32",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"author": "sheetjs",
 	"description": "Pure-JS CRC-32",
 	"keywords": [ "crc32", "checksum", "crc" ],
+	"bin": {
+		"crc32": "./bin/crc32.njs"
+	},
 	"main": "./crc32",
+	"dependencies": {
+		"concat-stream":"",
+		"exit-on-epipe":""
+	},
 	"devDependencies": {
-		"codepage":"",
 		"mocha":"",
-		"uglify-js":""
+		"codepage":""
 	},
 	"repository": { "type":"git", "url":"git://github.com/SheetJS/js-crc32.git" },
 	"scripts": {
@@ -20,6 +26,7 @@
 			"pattern": "crc32.js"
 		}
 	},
+	"files": ["crc32.js", "bin/crc32.njs", "LICENSE", "README.md"],
 	"bugs": { "url": "https://github.com/SheetJS/js-crc32/issues" },
 	"license": "Apache-2.0",
 	"engines": { "node": ">=0.8" }

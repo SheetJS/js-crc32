@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- crc32.js (C) 2014-present SheetJS http://sheetjs.com -->
+<!-- vim: set ts=2: -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JS-CRC32 Live Demo</title>
+<style>
+#drop{
+	border:2px dashed #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	padding:25px;
+	text-align:center;
+	font:20pt bold,"Vollkorn";color:#bbb
+}
+#rawdata{
+	width:100%;
+}
+</style>
+</head>
+<body>
+<b>JS-CRC32 Live Demo</b><br />
+<a href="https://git.io/crc32">Source Code Repo</a><br />
+<a href="https://git.io/crc32_issues">Issues?  Something look weird?  Click here and report an issue</a><br />
+
+<div id="drop">Drop a text file to compute the CRC-32 checksum</div>
+<p><input type="file" name="xlfile" id="xlf" /> ... or click here to select a file</p>
+<textarea id="rawdata">... or paste text here ......</textarea>
+<input type="button" id="dotext" value="Click here to process the text"/><br />
+Advanced Demo Options: <br />
+Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked><br />
+<pre id="out">.</pre>
+<br />
+<script type="text/javascript">/* jshint browser: true */</script>
+<script src="crc32.js"></script>
+<script src="demo/browser.flow.js"></script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-36810333-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+</body>
+</html>

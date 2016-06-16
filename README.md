@@ -13,6 +13,11 @@ In the browser:
 
     <script src="crc32.js"></script>
 
+The browser exposes a variable ADLER32
+
+When installed globally, npm installs a script `crc32` that computes the
+checksum for a specified file or standard input.
+
 The script will manipulate `module.exports` if available (e.g. in a CommonJS
 `require` context).  This is not always desirable.  To prevent the behavior,
 define `DO_NOT_EXPORT_CRC`
@@ -46,13 +51,47 @@ For example:
 
 ## Testing
 
-`make test` will run the node-based tests.
+`make test` will run the nodejs-based test.
 
 To run the in-browser tests, run a local server and go to the `ctest` directory.
+`make ctestserv` will start a python `SimpleHTTPServer` server on port 8000.
+
 To update the browser artifacts, run `make ctest`.
 
-`make baseline` will generate baseline files based on the unicode mapping at
-<http://mathias.html5.org>
+To generate the bits file, use the `crc32` function from python zlib:
+
+```python
+>>> from zlib import crc32
+>>> x="foo bar baz٪☃🍣"
+>>> crc32(x)
+1531648243
+>>> crc32(x+x)
+-218791105
+>>> crc32(x+x+x)
+1834240887
+```
+
+The included `crc32.njs` script can process files or stdin:
+
+```
+$ echo "this is a test" > t.txt
+$ bin/crc32.njs t.txt
+1912935186
+```
+
+For comparison, the included `crc32.py` script uses python zlib:
+
+```
+$ bin/crc32.py t.txt
+1912935186
+```
+
+## Performance
+
+`make perf` will run algorithmic performance tests (which should justify certain
+decisions in the code).
+
+[js-adler32](http://git.io/adler32) has more performance notes
 
 ## License
 

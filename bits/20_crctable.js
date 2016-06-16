@@ -1,4 +1,5 @@
 /* see perf/crc32table.js */
+/*global Int32Array */
 function signed_crc_table()/*:CRC32TableType*/ {
 	var c = 0, table/*:Array<number>*/ = new Array(256);
 
@@ -18,4 +19,4 @@ function signed_crc_table()/*:CRC32TableType*/ {
 	return typeof Int32Array !== 'undefined' ? new Int32Array(table) : table;
 }
 
-var table = signed_crc_table();
+var T = signed_crc_table();

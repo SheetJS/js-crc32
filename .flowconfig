@@ -9,9 +9,14 @@
 .*/misc/.*
 .*/perf/.*
 
+.*/demo/browser.js
+
 [include]
 crc32.flow.js
+.*/demo/browser.flow.js
 
 [libs]
+bits/10_types.js
+misc/flow.js
 
 [options]

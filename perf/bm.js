@@ -4,7 +4,11 @@ var c = require('ansi')(process.stdout);
 
 function test_end(e) { c.horizontalAbsolute(0).write("✓ "+e.target); c.write('\n'); }
 
-function suite_end() { console.log('Fastest is ' + this.filter('fastest').pluck('name')); } 
+function suite_end() {
+	var o = this.filter('fastest');
+	var m = typeof o.pluck === 'undefined' ? o.map('name') : o.pluck('name');
+	console.log('Fastest is ' + m);
+}
 
 function test_cycle(e) { c.horizontalAbsolute(0); c.eraseLine(); c.write("→ "+e.target); }
 
@@ -25,9 +29,9 @@ BM.prototype.run = function(skip) {
 
 BM.prototype.add = function(msg, test) {
 	this.suites.push([msg, {
-		onCycle: test_cycle, 
+		onCycle: test_cycle,
 		onComplete: test_end,
-		defer: false, 
+		defer: false,
 		fn: test
 	}]);
 	this.maxlen = Math.max(this.maxlen, msg.length);
