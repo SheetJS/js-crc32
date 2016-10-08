@@ -26,10 +26,10 @@ function make_chunk_buf_to_str(BType/*:function*/)/*:Stringifier*/ {
 	};
 }
 /*# buffer to binary string */
-var bstrify/*:Stringifier*/ = make_chunk_buf_to_str(Uint8Array);
+var bstrify/*:Stringifier*/ = make_chunk_buf_to_str(typeof Uint8Array !== 'undefined' ? Uint8Array : Array);
 
 /*# readAsBinaryString support */
-var rABS/*:boolean*/ = is_defined(FileReader, ['prototype', 'readAsBinaryString']);
+var rABS/*:boolean*/ = typeof FileReader !== 'undefined' && is_defined(FileReader, ['prototype', 'readAsBinaryString']);
 var userABS/*:HTMLInputElement*/ = (document.getElementsByName("userabs")[0]/*:any*/);
 if(!rABS) {
 	userABS.disabled = true;
@@ -37,7 +37,7 @@ if(!rABS) {
 }
 
 /*## Process Result */
-/*:: declare class HTMLPreElement extends HTMLElement { innerText:string; } */
+/*:: declare class HTMLPreElement extends HTMLElement { innerText?:string; } */
 function process_value(val/*:CRC32Type*/) {
 	var output = [];
 	output[0] = "Signed    : " + val;

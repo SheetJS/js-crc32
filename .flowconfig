@@ -10,13 +10,18 @@
 .*/perf/.*
 
 .*/demo/browser.js
+.*/shim.js
 
 [include]
 crc32.flow.js
+.*/bin/.*.njs
 .*/demo/browser.flow.js
 
 [libs]
 bits/10_types.js
 misc/flow.js
+misc/flowdeps.js
 
 [options]
+module.file_ext=.js
+module.file_ext=.njs

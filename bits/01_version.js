@@ -1,1 +1,1 @@
-CRC32.version = '0.4.1';
+CRC32.version = '1.0.0';

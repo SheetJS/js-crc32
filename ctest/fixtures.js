@@ -17,9 +17,22 @@ type Stringifier = {(d:ArrayLike):string};
 
 declare class CRC32Module {
 	table:CRC32TableType;
-	bstr(s:string):CRC32Type;
-	buf(b:ABuf):CRC32Type;
-	str(s:string):CRC32Type;
+	bstr(s:string, seed:?CRC32Type):CRC32Type;
+	buf(b:ABuf, seed:?CRC32Type):CRC32Type;
+	str(s:string, seed:?CRC32Type):CRC32Type;
+	version:string;
+};
+*/
+/*::
+type _CB = {(data:Buffer):void;};
+declare module 'concat-stream' {declare function exports(f:_CB):stream$Duplex;};
+declare module 'exit-on-epipe' {};
+
+declare module 'crc-32' { declare var exports:CRC32Module;  };
+declare module '../' { declare var exports:CRC32Module; };
+
+declare module 'printj' {
+  declare function sprintf(fmt:string, ...args:any):string;
 };
 */
 /* vim: set ts=2: */
@@ -33,13 +46,13 @@ var node_crc = require('./node-crc');
 function z1(bstr) { return js_crc32.bstr(bstr); }
 function z2(bstr) { return buffer_crc32.signed(bstr); }
 function z3(bstr) { return crc32(bstr); }
-function z4(bstr) { return node_crc.crc32(bstr);}
+function z4(bstr) { return node_crc.crc32(bstr)|0;}
 function z5(bstr) { return js_crc32_old.bstr(bstr); }
 
 function b1(buf) { return js_crc32.buf(buf); }
 function b2(buf) { return buffer_crc32.signed(buf); }
 function b3(buf) { return crc32(buf); }
-function b4(buf) { return node_crc.crc32(buf); }
+function b4(buf) { return node_crc.crc32(buf)|0; }
 function b5(buf) { return js_crc32_old.buf(buf); }
 
 function u1(str) { return js_crc32.str(str); }
@@ -97,14 +110,14 @@ if(btest) for(var j = 0; j != ntests; ++j) {
 	if(do_bstr) {
 		assert.equal(z1(bstr_tests[j][0]), z2(bstr_tests[j][0]));
 		assert.equal(z1(bstr_tests[j][0]), fix(z3(bstr_tests[j][0])));
-		assert.equal(z1(bstr_tests[j][0]), fix(z4(bstr_tests[j][0])));
+		assert.equal(z1(bstr_tests[j][0]), (z4(bstr_tests[j][0])));
 		assert.equal(z1(bstr_tests[j][0]), z5(bstr_tests[j][0]));
 	}
 
 	if(do_buf) {
 		assert.equal(b1(bstr_tests[j][1]), b2(bstr_tests[j][1]));
 		assert.equal(b1(bstr_tests[j][1]), fix(b3(bstr_tests[j][1])));
-		assert.equal(b1(bstr_tests[j][1]), fix(b4(bstr_tests[j][1])));
+		assert.equal(b1(bstr_tests[j][1]), (b4(bstr_tests[j][1])));
 		assert.equal(b1(bstr_tests[j][1]), b5(bstr_tests[j][1]));
 	}
 }

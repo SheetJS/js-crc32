@@ -23,9 +23,9 @@ function make_chunk_buf_to_str(BType) {
 		return o;
 	};
 }
-var bstrify = make_chunk_buf_to_str(Uint8Array);
+var bstrify = make_chunk_buf_to_str(typeof Uint8Array !== 'undefined' ? Uint8Array : Array);
 
-var rABS = is_defined(FileReader, ['prototype', 'readAsBinaryString']);
+var rABS = typeof FileReader !== 'undefined' && is_defined(FileReader, ['prototype', 'readAsBinaryString']);
 var userABS = (document.getElementsByName("userabs")[0]);
 if(!rABS) {
 	userABS.disabled = true;

@@ -23,7 +23,7 @@ var CRC32;
 	}
 	/*jshint ignore:end */
 }(function(CRC32) {
-CRC32.version = '0.4.1';
+CRC32.version = '1.0.0';
 /*::
 type CRC32Type = number;
 type ABuf = Array<number> | Buffer;
@@ -54,9 +54,9 @@ var T = signed_crc_table();
 /*# charCodeAt is the best approach for binary strings */
 /*global Buffer */
 var use_buffer = typeof Buffer !== 'undefined';
-function crc32_bstr(bstr/*:string*/)/*:CRC32Type*/ {
-	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(new Buffer(bstr));
-	var C = -1, L = bstr.length - 1;
+function crc32_bstr(bstr/*:string*/, seed/*:?CRC32Type*/)/*:CRC32Type*/ {
+	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(new Buffer(bstr), seed);
+	var C = seed/*:: ? 0 : 0 */ ^ -1, L = bstr.length - 1;
 	for(var i = 0; i < L;) {
 		C = (C>>>8) ^ T[(C^bstr.charCodeAt(i++))&0xFF];
 		C = (C>>>8) ^ T[(C^bstr.charCodeAt(i++))&0xFF];
@@ -65,9 +65,9 @@ function crc32_bstr(bstr/*:string*/)/*:CRC32Type*/ {
 	return C ^ -1;
 }
 
-function crc32_buf(buf/*:ABuf*/)/*:CRC32Type*/ {
-	if(buf.length > 10000) return crc32_buf_8(buf);
-	var C = -1, L = buf.length - 3;
+function crc32_buf(buf/*:ABuf*/, seed/*:?CRC32Type*/)/*:CRC32Type*/ {
+	if(buf.length > 10000) return crc32_buf_8(buf, seed);
+	var C = seed/*:: ? 0 : 0 */ ^ -1, L = buf.length - 3;
 	for(var i = 0; i < L;) {
 		C = (C>>>8) ^ T[(C^buf[i++])&0xFF];
 		C = (C>>>8) ^ T[(C^buf[i++])&0xFF];
@@ -78,8 +78,8 @@ function crc32_buf(buf/*:ABuf*/)/*:CRC32Type*/ {
 	return C ^ -1;
 }
 
-function crc32_buf_8(buf/*:ABuf*/)/*:CRC32Type*/ {
-	var C = -1, L = buf.length - 7;
+function crc32_buf_8(buf/*:ABuf*/, seed/*:?CRC32Type*/)/*:CRC32Type*/ {
+	var C = seed/*:: ? 0 : 0 */ ^ -1, L = buf.length - 7;
 	for(var i = 0; i < L;) {
 		C = (C>>>8) ^ T[(C^buf[i++])&0xFF];
 		C = (C>>>8) ^ T[(C^buf[i++])&0xFF];
@@ -95,8 +95,8 @@ function crc32_buf_8(buf/*:ABuf*/)/*:CRC32Type*/ {
 }
 
 /*# much much faster to intertwine utf8 and C */
-function crc32_str(str/*:string*/)/*:CRC32Type*/ {
-	var C = -1;
+function crc32_str(str/*:string*/, seed/*:?CRC32Type*/)/*:CRC32Type*/ {
+	var C = seed/*:: ? 0 : 0 */ ^ -1;
 	for(var i = 0, L=str.length, c, d; i < L;) {
 		c = str.charCodeAt(i++);
 		if(c < 0x80) {

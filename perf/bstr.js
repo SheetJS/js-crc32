@@ -1,4 +1,6 @@
 var table = require('../').table;
+var old = require('crc-32').bstr;
+var cur = require('../').bstr;
 
 function strToArr(str) {
 	// sweet hack to turn string into a 'byte' array
@@ -91,13 +93,17 @@ for(var i = 0; i !== w; ++i) {
 	assert.equal(node_crc32(foobar), sheetjs2(foobar));
 	assert.equal(node_crc32(foobar), sheetjs3(foobar));
 	assert.equal(node_crc32(foobar), sheetjs8(foobar));
+	assert.equal(node_crc32(foobar), old(foobar));
+	assert.equal(node_crc32(foobar), cur(foobar));
 }
 
 var BM = require('./bm');
 var suite = new BM('binary string');
-suite.add('npm crc32', function() { for(var j = 0; j !== w; ++j) node_crc32(b[j]); });
+//suite.add('npm crc32', function() { for(var j = 0; j !== w; ++j) node_crc32(b[j]); });
 suite.add('sheetjs 1', function() { for(var j = 0; j !== w; ++j) sheetjs1(b[j]); });
 suite.add('sheetjs 2', function() { for(var j = 0; j !== w; ++j) sheetjs2(b[j]); });
 suite.add('sheetjs 3', function() { for(var j = 0; j !== w; ++j) sheetjs3(b[j]); });
 suite.add('sheetjs 8', function() { for(var j = 0; j !== w; ++j) sheetjs8(b[j]); });
+suite.add('last vers', function() { for(var j = 0; j !== w; ++j) old(b[j]); });
+suite.add('current v', function() { for(var j = 0; j !== w; ++j) cur(b[j]); });
 suite.run();

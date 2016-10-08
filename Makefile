@@ -2,6 +2,7 @@ LIB=crc32
 REQS=
 ADDONS=
 AUXTARGETS=demo/browser.js
+CMDS=bin/crc32.njs
 HTMLLINT=index.html
 
 ULIB=$(shell echo $(LIB) | tr a-z A-Z)
@@ -37,6 +38,7 @@ test mocha: test.js $(TARGET) baseline ## Run test suite
 ctest: ## Build browser test (into ctest/ subdirectory)
 	cat misc/*.js > ctest/fixtures.js
 	cp -f test.js ctest/test.js
+	cp -f shim.js ctest/shim.js
 	cp -f $(TARGET) ctest/
 
 .PHONY: ctestserv
@@ -56,6 +58,7 @@ clean-baseline: ## Remove test baselines
 .PHONY: lint
 lint: $(TARGET) $(AUXTARGETS) ## Run jshint and jscs checks
 	@jshint --show-non-errors $(TARGET) $(AUXTARGETS)
+	@jshint --show-non-errors $(CMDS)
 	@jshint --show-non-errors package.json
 	@jshint --show-non-errors --extract=always $(HTMLLINT)
 	@jscs $(TARGET) $(AUXTARGETS)
