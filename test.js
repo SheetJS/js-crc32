@@ -35,7 +35,7 @@ describe('crc32 bits', function() {
 	bits.forEach(function(i) {
 		var msg = i[0], l = i[0].length, L = i[1]|0;
 		if(l > 20) msg = i[0].substr(0,5) + "...(" + l + ")..." + i[0].substr(-5);
-		if(l > 100 && msieversion() < 7) return;
+		if(l > 100 && msieversion() < 9) return;
 		it(msg, function() {
 			if(i[2] === 1) assert.equal(X.bstr(i[0]), L);
 			assert.equal(X.str(i[0]), i[1]|0);
