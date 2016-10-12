@@ -3,3 +3,4 @@ test_files/*.py
 test_files/*.js
 test_files/baseline*
 misc/coverage.html
+ctest/sauce*

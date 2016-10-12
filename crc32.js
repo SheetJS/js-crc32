@@ -21,7 +21,7 @@ var CRC32;
 	}
 	/*jshint ignore:end */
 }(function(CRC32) {
-CRC32.version = '1.0.0';
+CRC32.version = '1.0.1';
 /* see perf/crc32table.js */
 /*global Int32Array */
 function signed_crc_table() {
@@ -44,10 +44,7 @@ function signed_crc_table() {
 }
 
 var T = signed_crc_table();
-/*global Buffer */
-var use_buffer = typeof Buffer !== 'undefined';
 function crc32_bstr(bstr, seed) {
-	if(bstr.length > 32768) if(use_buffer) return crc32_buf_8(new Buffer(bstr), seed);
 	var C = seed ^ -1, L = bstr.length - 1;
 	for(var i = 0; i < L;) {
 		C = (C>>>8) ^ T[(C^bstr.charCodeAt(i++))&0xFF];

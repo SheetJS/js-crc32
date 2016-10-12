@@ -32,7 +32,7 @@ clean: clean-baseline ## Remove targets and build artifacts
 
 .PHONY: test mocha
 test mocha: test.js $(TARGET) baseline ## Run test suite
-	mocha -R spec -t 20000
+	mocha -R spec -t 30000
 
 .PHONY: ctest
 ctest: ## Build browser test (into ctest/ subdirectory)

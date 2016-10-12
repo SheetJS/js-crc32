@@ -38,16 +38,36 @@ var foobar = "foo bar baz٪☃🍣";
 for(var i = 0; i != 4; ++i) foobar += " " + foobar;
 
 var assert = require('assert');
-{
-	assert.equal(sheetjs1(foobar), sheetjs2(foobar));
-	assert.equal(sheetjs1(foobar), old(foobar));
-	assert.equal(sheetjs1(foobar), cur(foobar));
+function check(foobar) {
+	var baseline = old(foobar);
+	assert.equal(baseline, sheetjs1(foobar));
+	assert.equal(baseline, sheetjs2(foobar));
+	assert.equal(baseline, cur(foobar));
 }
 
 var BM = require('./bm');
-var suite = new BM('unicode string');
+var suite = new BM('unicode string (' + foobar.length + ')');
 suite.add('sheetjs 1', function() { for(var j = 0; j != 1000; ++j) sheetjs1(foobar); });
 suite.add('sheetjs 2', function() { for(var j = 0; j != 1000; ++j) sheetjs2(foobar); });
-suite.add('last vers', function() { for(var j = 0; j != 1000; ++j) old(foobar); });
-suite.add('current v', function() { for(var j = 0; j != 1000; ++j) cur(foobar); });
+suite.add('last vers', function() { for(var j = 0; j != 1000; ++j) old(foobar, 0) ; });
+suite.add('current v', function() { for(var j = 0; j != 1000; ++j) cur(foobar, 0); });
 suite.run();
+
+function doit(foobar) {
+	check(foobar);
+	var s = new BM('unicode string (' + foobar.length + ')');
+	s.add('sheetjs 1', function() { sheetjs1(foobar); });
+	s.add('sheetjs 2', function() { sheetjs2(foobar); });
+	s.add('last vers', function() { old(foobar, 0); });
+	s.add('current v', function() { cur(foobar, 0); });
+	s.run();
+}
+
+for(var i = 0; i != 4; ++i) foobar += " " + foobar;
+doit(foobar);
+
+foobar += " " + foobar;
+doit(foobar);
+
+foobar += " " + foobar;
+doit(foobar);

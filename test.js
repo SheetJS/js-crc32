@@ -36,11 +36,13 @@ describe('crc32 bits', function() {
 		var msg = i[0], l = i[0].length, L = i[1]|0;
 		if(l > 20) msg = i[0].substr(0,5) + "...(" + l + ")..." + i[0].substr(-5);
 		if(l > 100 && msieversion() < 9) return;
+		if(l > 20000 && typeof Buffer === 'undefined') return;
 		it(msg, function() {
 			if(i[2] === 1) assert.equal(X.bstr(i[0]), L);
 			assert.equal(X.str(i[0]), i[1]|0);
 			if(typeof Buffer !== 'undefined') assert.equal(X.buf(new Buffer(i[0])), L);
-			for(var x = 0; x < i[0].length; ++x) {
+			var len = i[0].length, step = len < 20000 ? 1 : len < 50000 ? Math.ceil(len / 20000) : Math.ceil(len / 2000);
+			for(var x = 0; x < len; x += step) {
 				if(i[0].charCodeAt(x) >= 0xD800 && i[0].charCodeAt(x) < 0xE000) continue;
 				if(i[2] === 1) {
 					var bstrcrc = X.bstr(i[0].substr(x), X.bstr(i[0].substr(0, x)));

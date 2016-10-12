@@ -38,6 +38,14 @@ function node_crc32(bstr) {
 	return crcTable(strToArr(bstr));
 }
 
+function sheetjsB(bstr) {
+	var b = new Buffer(bstr, 'binary');
+	for(var crc = -1, i = 0; i < b.length; ++i) {
+		crc = (crc >>> 8) ^ table[(crc ^ b[i]) & 0xFF];
+	}
+	return crc ^ -1;
+}
+
 function sheetjs1(bstr) {
 	for(var crc = -1, i = 0; i < bstr.length; ++i) {
 		crc = (crc >>> 8) ^ table[(crc ^ bstr.charCodeAt(i)) & 0xFF];
@@ -80,30 +88,34 @@ function sheetjs8(bstr) {
 	return crc ^ -1;
 }
 
-var w = 2000;
-var base = new Array(w);
-for(var i = 0; i !== w; ++i) base[i] = String.fromCharCode((Math.random()*256)&255);
+var w = 80000;
 var b = new Array(w);
-for(var i = 0; i !== w; ++i) b[i] = ""+base.slice(0,i).join("");
+b[0] = "";
+for(var i = 1; i !== w; ++i) b[i] = b[i-1] + String.fromCharCode((Math.random()*256)&255);
+
 
 var assert = require('assert');
-for(var i = 0; i !== w; ++i) {
-	var foobar = b[i];
-	assert.equal(node_crc32(foobar), sheetjs1(foobar));
-	assert.equal(node_crc32(foobar), sheetjs2(foobar));
-	assert.equal(node_crc32(foobar), sheetjs3(foobar));
-	assert.equal(node_crc32(foobar), sheetjs8(foobar));
-	assert.equal(node_crc32(foobar), old(foobar));
-	assert.equal(node_crc32(foobar), cur(foobar));
+function check(foobar) {
+	var baseline = old(foobar);
+	assert.equal(baseline, sheetjs1(foobar));
+	assert.equal(baseline, sheetjs2(foobar));
+	assert.equal(baseline, sheetjs3(foobar));
+	assert.equal(baseline, sheetjs8(foobar));
+	assert.equal(baseline, sheetjsB(foobar));
+	assert.equal(baseline, cur(foobar));
+	if(i < 100) assert.equal(baseline, node_crc32(foobar));
 }
 
+for(var i = 0; i !== w; ++i) {
+	var foobar = b[i];
+}
 var BM = require('./bm');
 var suite = new BM('binary string');
-//suite.add('npm crc32', function() { for(var j = 0; j !== w; ++j) node_crc32(b[j]); });
-suite.add('sheetjs 1', function() { for(var j = 0; j !== w; ++j) sheetjs1(b[j]); });
-suite.add('sheetjs 2', function() { for(var j = 0; j !== w; ++j) sheetjs2(b[j]); });
-suite.add('sheetjs 3', function() { for(var j = 0; j !== w; ++j) sheetjs3(b[j]); });
-suite.add('sheetjs 8', function() { for(var j = 0; j !== w; ++j) sheetjs8(b[j]); });
-suite.add('last vers', function() { for(var j = 0; j !== w; ++j) old(b[j]); });
-suite.add('current v', function() { for(var j = 0; j !== w; ++j) cur(b[j]); });
+suite.add('sheetjs 1', function() { for(var j = 0; j !== w; j+=100) sheetjs1(b[j]); });
+suite.add('sheetjs 2', function() { for(var j = 0; j !== w; j+=100) sheetjs2(b[j]); });
+suite.add('sheetjs 3', function() { for(var j = 0; j !== w; j+=100) sheetjs3(b[j]); });
+suite.add('sheetjs 8', function() { for(var j = 0; j !== w; j+=100) sheetjs8(b[j]); });
+suite.add('sheetjs B', function() { for(var j = 0; j !== w; j+=100) sheetjsB(b[j]); });
+suite.add('last vers', function() { for(var j = 0; j !== w; j+=100) old(b[j]); });
+suite.add('current v', function() { for(var j = 0; j !== w; j+=100) cur(b[j]); });
 suite.run();
