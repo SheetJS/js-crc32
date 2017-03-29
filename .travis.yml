@@ -1,5 +1,6 @@
 language: node_js
 node_js:
+  - "7"
   - "6"
   - "5"
   - "4"
@@ -14,4 +15,3 @@ before_install:
   - "npm install coveralls mocha-lcov-reporter"
 after_success:
   - "make coveralls-spin"
-#  - "make perf-all"
