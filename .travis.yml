@@ -8,8 +8,8 @@ node_js:
   - "0.10"
   - "0.8"
 before_install:
-  - "npm install -g npm@next"
-  - "npm install -g mocha"
+  - "npm install -g npm@4.3.0"
+  - "npm install -g mocha@2.x voc"
   - "npm install codepage"
   - "npm install blanket"
   - "npm install coveralls mocha-lcov-reporter"

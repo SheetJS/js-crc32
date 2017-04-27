@@ -68,11 +68,17 @@ for(var i = 0; i < args.length; ++i) {
 if(!process.stdin.isTTY) filename = filename || "-";
 if(filename.length===0) die("crc32: must specify a filename ('-' for stdin)",1);
 
-function process_data(data/*:Buffer*/) {
-	var out/*:CRC32Type*/ = X.buf(data, seed);
-	return console.log(fmt === "" ? out : require("printj").sprintf(fmt, out));
-}
+var crc32 = seed;
+var writable = require('stream').Writable();
+writable._write = function(chunk, e, cb) { crc32 = X.buf(chunk, crc32); cb(); };
+writable._writev = function(chunks, cb) {
+	chunks.forEach(function(c) { crc32 = X.buf(c.chunk, crc32);});
+	cb();
+};
+writable.on('finish', function() {
+	console.log(fmt === "" ? crc32 : require("printj").sprintf(fmt, crc32));
+});
 
-if(filename === "-") process.stdin.pipe(require('concat-stream')(process_data));
-else if(fs.existsSync(filename)) process_data(fs.readFileSync(filename));
+if(filename === "-") process.stdin.pipe(writable);
+else if(fs.existsSync(filename)) fs.createReadStream(filename).pipe(writable);
 else die("crc32: " + filename + ": No such file or directory", 2);

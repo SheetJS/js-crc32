@@ -96,6 +96,15 @@ $ bin/crc32.py t.txt
 1912935186
 ```
 
+On OSX the command `cksum` generates unsigned CRC-32 with Algorithm 3:
+
+```bash
+$ cksum -o 3 < IE8.Win7.For.Windows.VMware.zip
+1891069052 4161613172
+$ crc32 --unsigned ~/Downloads/IE8.Win7.For.Windows.VMware.zip
+1891069052
+```
+
 ## Performance
 
 `make perf` will run algorithmic performance tests (which should justify certain

@@ -1,6 +1,6 @@
 {
 	"name": "crc-32",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": "sheetjs",
 	"description": "Pure-JS CRC-32",
 	"keywords": [ "crc32", "checksum", "crc" ],
@@ -9,7 +9,6 @@
 	},
 	"main": "./crc32",
 	"dependencies": {
-		"concat-stream":"",
 		"printj":"",
 		"exit-on-epipe":""
 	},

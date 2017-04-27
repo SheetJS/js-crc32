@@ -15,9 +15,6 @@
 	text-align:center;
 	font:20pt bold,"Vollkorn";color:#bbb
 }
-#rawdata{
-	width:100%;
-}
 a { text-decoration: none }
 </style>
 </head>
@@ -25,25 +22,18 @@ a { text-decoration: none }
 <pre>
 <b><a href="http://sheetjs.com/bits">SheetJS JS-CRC32 Live Demo</a></b>
 (text works back to IE6; drag and drop works back to IE10)
-(<b>This demo loads the entire file at once!</b>  For newer browsers, <a href="large.html">try the large file demo</a>)
 
 <a href="https://github.com/SheetJS/js-crc32">Source Code Repo</a>
 <a href="https://github.com/SheetJS/js-crc32/issues">Issues?  Something look weird?  Click here and report an issue</a>
 <br />
 <div id="drop">Drop a text file to compute the CRC-32 checksum</div>
-<input type="file" name="xlfile" id="xlf" /> ... or click here to select a file
 
-<textarea id="rawdata">... or paste text here</textarea>
-<input type="button" id="dotext" value="Click here to process the text"/><br />
-<b>Advanced Demo Options:</b>
-Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked>
-</pre>
 <pre id="out"></pre>
 <br />
 <script type="text/javascript">/* jshint browser: true */</script>
 <script src="shim.js"></script>
 <script src="crc32.js"></script>
-<script src="demo/browser.flow.js"></script>
+<script src="demo/worker.flow.js"></script>
 <script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-36810333-1']);

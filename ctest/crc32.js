@@ -21,7 +21,7 @@ var CRC32;
 	}
 	/*jshint ignore:end */
 }(function(CRC32) {
-CRC32.version = '1.0.1';
+CRC32.version = '1.0.2';
 /* see perf/crc32table.js */
 /*global Int32Array */
 function signed_crc_table() {
