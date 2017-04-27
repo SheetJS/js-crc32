@@ -34,7 +34,7 @@ var handle_drop/*:EventHandler*/ = (function(e/*:DragEvent*/) {
 	var files/*:FileList*/ = e.dataTransfer.files;
 	var f/*:File*/ = files[0];
 
-	var worker = new Worker("/demo/work.js");
+	var worker = new Worker("/js-crc32" + "/demo/work.js");
 	worker.postMessage(f);
 	worker.onmessage = function(M) { var m = M.data; switch(m.t) {
 		case 'ready': break;
