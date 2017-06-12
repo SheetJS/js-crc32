@@ -26,6 +26,17 @@ function process_value(val/*:CRC32Type*/, progress/*:number*/) {
 	else out.innerText = o;
 }
 
+/*::
+type WMessage = {
+	t:string;
+	f:File;
+	crc:CRC32Type;
+	l:number;
+	sz:number;
+	bytes:number;
+};
+*/
+
 /*# Drag and Drop File */
 var handle_drop/*:EventHandler*/ = (function(e/*:DragEvent*/) {
 	e.stopPropagation();
@@ -34,9 +45,9 @@ var handle_drop/*:EventHandler*/ = (function(e/*:DragEvent*/) {
 	var files/*:FileList*/ = e.dataTransfer.files;
 	var f/*:File*/ = files[0];
 
-	var worker = new Worker("/js-crc32" + "/demo/work.js");
+	var worker = new Worker("demo/work.js");
 	worker.postMessage(f);
-	worker.onmessage = function(M) { var m = M.data; switch(m.t) {
+	worker.onmessage = function(M) { var m/*:WMessage*/ = (M.data/*:any*/); switch(m.t) {
 		case 'ready': break;
 		case 'start': break;
 		case 'data': process_value(m.crc, 100 * m.bytes / f.size); break;

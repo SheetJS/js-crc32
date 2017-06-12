@@ -3,7 +3,7 @@
 /*:: declare var CRC32: CRC32Module; */
 var X = CRC32;
 
-function console_log() { if(typeof console !== 'undefined') console.log.apply(console, [].slice.call(arguments)); }
+function console_log(/*:: ...args:Array<any> */) { if(typeof console !== 'undefined') console.log.apply(console, [].slice.call(arguments)); }
 
 function lpad(s/*:string*/, len/*:number*/, chr/*:?string*/)/*:string*/{
 	var L/*:number*/ = len - s.length, C/*:string*/ = chr || " ";

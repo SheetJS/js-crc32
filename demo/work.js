@@ -1,7 +1,7 @@
 /* js-crc32 (C) 2014-present  SheetJS -- http://sheetjs.com */
 /*:: declare var CRC32: CRC32Module; */
 /*:: declare var self: DedicatedWorkerGlobalScope; */
-importScripts('/js-crc32' + '/crc32.js');
+importScripts('../crc32.js');
 /*::self.*/postMessage({t:"ready"});
 
 var recrc = function(f, crc, l) {

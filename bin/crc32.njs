@@ -69,6 +69,7 @@ if(!process.stdin.isTTY) filename = filename || "-";
 if(filename.length===0) die("crc32: must specify a filename ('-' for stdin)",1);
 
 var crc32 = seed;
+// $FlowIgnore -- Writable is callable but type sig disagrees
 var writable = require('stream').Writable();
 writable._write = function(chunk, e, cb) { crc32 = X.buf(chunk, crc32); cb(); };
 writable._writev = function(chunks, cb) {

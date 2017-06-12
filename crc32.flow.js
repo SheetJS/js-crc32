@@ -26,7 +26,7 @@ var CRC32;
 CRC32.version = '1.0.2';
 /*::
 type CRC32Type = number;
-type ABuf = Array<number> | Buffer;
+type ABuf = Array<number> | Uint8Array | Buffer;
 type CRC32TableType = Array<number> | Int32Array;
 */
 /* see perf/crc32table.js */
