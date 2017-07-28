@@ -23,7 +23,7 @@ var CRC32;
 	}
 	/*jshint ignore:end */
 }(function(CRC32) {
-CRC32.version = '1.0.2';
+CRC32.version = '1.1.0';
 /*::
 type CRC32Type = number;
 type ABuf = Array<number> | Uint8Array | Buffer;
