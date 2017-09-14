@@ -66,7 +66,7 @@ var readcb = function(e/*:Event*/) {
 	console_log("onload", new Date(), rABS, false);
 	var target/*:FileReader*/ = (e.target/*:any*/);
 	var data = target.result;
-	var val/*:CRC32Type*/ = rABS ? X.bstr(data) : X.str(bstrify(data));
+	var val/*:CRC32Type*/ = rABS ? X.bstr((data/*:any*/)) : X.str(bstrify(data));
 	process_value(val);
 };
 

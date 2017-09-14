@@ -57,7 +57,7 @@ var readcb = function(e) {
 	console_log("onload", new Date(), rABS, false);
 	var target = (e.target);
 	var data = target.result;
-	var val = rABS ? X.bstr(data) : X.str(bstrify(data));
+	var val = rABS ? X.bstr((data)) : X.str(bstrify(data));
 	process_value(val);
 };
 

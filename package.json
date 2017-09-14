@@ -1,6 +1,6 @@
 {
 	"name": "crc-32",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"author": "sheetjs",
 	"description": "Pure-JS CRC-32",
 	"keywords": [ "crc32", "checksum", "crc" ],
@@ -8,24 +8,31 @@
 		"crc32": "./bin/crc32.njs"
 	},
 	"main": "./crc32",
+	"types": "types",
 	"dependencies": {
 		"printj":"~1.1.0",
 		"exit-on-epipe":"~1.0.1"
 	},
 	"devDependencies": {
 		"mocha":"~2.5.3",
-		"codepage":"~1.10.0"
+		"blanket": "~1.2.3",
+		"codepage":"~1.10.0",
+		"@sheetjs/uglify-js":"~2.7.3",
+		"@types/node":"^8.0.7",
+		"dtslint": "^0.1.2",
+		"typescript": "2.2.0"
 	},
 	"repository": { "type":"git", "url":"git://github.com/SheetJS/js-crc32.git" },
 	"scripts": {
-		"pretest": "git submodule init && git submodule update",
-		"test": "make test"
+		"test": "make test",
+		"dtslint": "dtslint types"
 	},
 	"config": {
 		"blanket": {
 			"pattern": "crc32.js"
 		}
 	},
+	"homepage": "http://sheetjs.com/opensource",
 	"files": ["crc32.js", "bin/crc32.njs", "LICENSE", "README.md"],
 	"bugs": { "url": "https://github.com/SheetJS/js-crc32/issues" },
 	"license": "Apache-2.0",
