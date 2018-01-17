@@ -1,32 +1,34 @@
 /* crc32.js (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
 /*exported CRC32 */
-var CRC32;
-/*:: declare var DO_NOT_EXPORT_CRC: any; */
-/*:: declare var define: any; */
-(function (factory) {
+/*:: declare var DO_NOT_EXPORT_CRC:?boolean; */
+/*:: declare function define(cb:()=>any):void; */
+var CRC32/*:CRC32Module*/;
+(function (factory/*:(a:any)=>void*/)/*:void*/ {
 	/*jshint ignore:start */
+	/*eslint-disable */
 	if(typeof DO_NOT_EXPORT_CRC === 'undefined') {
 		if('object' === typeof exports) {
 			factory(exports);
 		} else if ('function' === typeof define && define.amd) {
 			define(function () {
-				var module = {};
+				var module/*:CRC32Module*/ = /*::(*/{}/*:: :any)*/;
 				factory(module);
 				return module;
 			});
 		} else {
-			factory(CRC32 = {});
+			factory(CRC32 = /*::(*/{}/*:: :any)*/);
 		}
 	} else {
-		factory(CRC32 = {});
+		factory(CRC32 = /*::(*/{}/*:: :any)*/);
 	}
+	/*eslint-enable */
 	/*jshint ignore:end */
-}(function(CRC32) {
-CRC32.version = '1.1.1';
+}(function(CRC32/*:CRC32Module*/) {
+CRC32.version = '1.2.0';
 /*::
 type CRC32Type = number;
-type ABuf = Array<number> | Uint8Array | Buffer;
+type ABuf = Array<number> | Buffer | Uint8Array;
 type CRC32TableType = Array<number> | Int32Array;
 */
 /* see perf/crc32table.js */
@@ -116,7 +118,10 @@ function crc32_str(str/*:string*/, seed/*:?CRC32Type*/)/*:CRC32Type*/ {
 	return C ^ -1;
 }
 CRC32.table = T;
+// $FlowIgnore
 CRC32.bstr = crc32_bstr;
+// $FlowIgnore
 CRC32.buf = crc32_buf;
+// $FlowIgnore
 CRC32.str = crc32_str;
 }));

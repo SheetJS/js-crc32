@@ -27,8 +27,8 @@ a { text-decoration: none }
 (text works back to IE6; drag and drop works back to IE10)
 (<b>This demo loads the entire file at once!</b>  For newer browsers, <a href="large.html">try the large file demo</a>)
 
-<a href="https://github.com/SheetJS/js-crc32">Source Code Repo</a>
-<a href="https://github.com/SheetJS/js-crc32/issues">Issues?  Something look weird?  Click here and report an issue</a>
+<a href="https://git.io/crc32">Source Code Repo</a>
+<a href="https://git.io/crc32_issues">Issues?  Something look weird?  Click here and report an issue</a>
 <br />
 <div id="drop">Drop a text file to compute the CRC-32 checksum</div>
 <input type="file" name="xlfile" id="xlf" /> ... or click here to select a file
@@ -36,7 +36,7 @@ a { text-decoration: none }
 <textarea id="rawdata">... or paste text here</textarea>
 <input type="button" id="dotext" value="Click here to process the text"/><br />
 <b>Advanced Demo Options:</b>
-Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked>
+Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked><br />
 </pre>
 <pre id="out"></pre>
 <br />
@@ -45,6 +45,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
 <script src="crc32.js"></script>
 <script src="demo/browser.flow.js"></script>
 <script type="text/javascript">
+	/*eslint-env browser */
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-36810333-1']);
 	_gaq.push(['_trackPageview']);

@@ -22,9 +22,8 @@ The browser exposes a variable `CRC32`.
 When installed globally, npm installs a script `crc32` that computes the
 checksum for a specified file or standard input.
 
-The script will manipulate `module.exports` if available (e.g. in a CommonJS
-`require` context).  This is not always desirable.  To prevent the behavior,
-define `DO_NOT_EXPORT_CRC`.
+The script will manipulate `module.exports` if available .  This is not always
+desirable.  To prevent the behavior, define `DO_NOT_EXPORT_CRC`.
 
 ## Usage
 
@@ -34,13 +33,13 @@ optional second argument representing the starting "seed" (for rolling CRC).
 The return value is a signed 32-bit integer.
 
 - `CRC32.buf(byte array or buffer[, seed])` assumes the argument is a sequence
-  of 8-bit unsigned integers (e.g. nodejs `Buffer` or simple array of ints).
+  of 8-bit unsigned integers (nodejs `Buffer`, `Uint8Array` or array of bytes).
 
-- `CRC32.bstr(binary string[, seed])` assumes the argument is a "binary" string
+- `CRC32.bstr(binary string[, seed])` assumes the argument is a binary string
   where byte `i` is the low byte of the UCS-2 char: `str.charCodeAt(i) & 0xFF`
 
-- `CRC32.str(string[, seed])` assumes the argument is a standard string and
-  calculates the CRC32 of the UTF-8 encoding.
+- `CRC32.str(string[, seed])` assumes the argument is a standard JS string and
+  calculates the hash of the UTF-8 encoding.
 
 For example:
 
@@ -68,7 +67,7 @@ To run the in-browser tests, run a local server and go to the `ctest` directory.
 
 To update the browser artifacts, run `make ctest`.
 
-To generate the bits file, use the `crc32` function from python zlib:
+To generate the bits file, use the `crc32` function from python `zlib`:
 
 ```python
 >>> from zlib import crc32
@@ -81,7 +80,7 @@ To generate the bits file, use the `crc32` function from python zlib:
 1834240887
 ```
 
-The included `crc32.njs` script can process files or stdin:
+The included `crc32.njs` script can process files or standard input:
 
 ```bash
 $ echo "this is a test" > t.txt
@@ -89,7 +88,7 @@ $ bin/crc32.njs t.txt
 1912935186
 ```
 
-For comparison, the included `crc32.py` script uses python zlib:
+For comparison, the included `crc32.py` script uses python `zlib`:
 
 ```bash
 $ bin/crc32.py t.txt
@@ -110,7 +109,7 @@ $ crc32 --unsigned ~/Downloads/IE8.Win7.For.Windows.VMware.zip
 `make perf` will run algorithmic performance tests (which should justify certain
 decisions in the code).
 
-[js-adler32](http://git.io/adler32) has more performance notes
+The [`adler-32` project](http://git.io/adler32) has more performance notes
 
 ## License
 

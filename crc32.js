@@ -4,6 +4,7 @@
 var CRC32;
 (function (factory) {
 	/*jshint ignore:start */
+	/*eslint-disable */
 	if(typeof DO_NOT_EXPORT_CRC === 'undefined') {
 		if('object' === typeof exports) {
 			factory(exports);
@@ -19,9 +20,10 @@ var CRC32;
 	} else {
 		factory(CRC32 = {});
 	}
+	/*eslint-enable */
 	/*jshint ignore:end */
 }(function(CRC32) {
-CRC32.version = '1.1.1';
+CRC32.version = '1.2.0';
 /* see perf/crc32table.js */
 /*global Int32Array */
 function signed_crc_table() {
@@ -107,7 +109,10 @@ function crc32_str(str, seed) {
 	return C ^ -1;
 }
 CRC32.table = T;
+// $FlowIgnore
 CRC32.bstr = crc32_bstr;
+// $FlowIgnore
 CRC32.buf = crc32_buf;
+// $FlowIgnore
 CRC32.str = crc32_str;
 }));

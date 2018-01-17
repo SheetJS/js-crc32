@@ -1,6 +1,7 @@
 /* crc32.js (C) 2014-present SheetJS -- http://sheetjs.com */
 /* eslint-env node */
 /* vim: set ts=2 ft=javascript: */
+/*jshint node:true */
 /// <reference types="../node_modules/@types/node/" />
 /* node type definition is missing writable stream _writev */
 interface Chunk { chunk: any; encoding: string; }

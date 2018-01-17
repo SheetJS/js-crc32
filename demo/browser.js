@@ -1,5 +1,6 @@
 /*jshint browser:true */
-/*global CRC32, console */
+/*eslint-env browser */
+/*global CRC32, console, Uint8Array */
 var X = CRC32;
 
 function console_log() { if(typeof console !== 'undefined') console.log.apply(console, [].slice.call(arguments)); }
@@ -57,7 +58,7 @@ var readcb = function(e) {
 	console_log("onload", new Date(), rABS, false);
 	var target = (e.target);
 	var data = target.result;
-	var val = rABS ? X.bstr((data)) : X.str(bstrify(data));
+	var val = rABS ? X.bstr(data) : X.str(bstrify(data));
 	process_value(val);
 };
 

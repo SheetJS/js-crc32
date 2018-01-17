@@ -5,14 +5,14 @@
 		"ecmaVersion": 3,
 	},
 	"plugins": [ "html", "json" ],
-	"!extends": "eslint:recommended",
+	"extends": "eslint:recommended",
 	"rules": {
-		"no-console": 0,
-		"no-bitwise": 0,
-		"curly": 0,
 		"comma-style": [ 2, "last" ],
+		"comma-dangle": [ 2, "never" ],
+		"curly": 0,
+		"no-bitwise": 0,
+		"no-console": 0,
 		"no-trailing-spaces": 2,
-		"semi": [ 2, "always" ],
-		"comma-dangle": [ 2, "never" ]
+		"semi": [ 2, "always" ]
 	}
 }
