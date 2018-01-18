@@ -34,7 +34,7 @@ clean: clean-baseline ## Remove targets and build artifacts
 
 .PHONY: test mocha
 test mocha: test.js $(TARGET) baseline ## Run test suite
-	mocha -R spec -t 30000
+	mocha -R spec -t 60000
 
 .PHONY: ctest
 ctest: ## Build browser test (into ctest/ subdirectory)
@@ -88,11 +88,11 @@ flow: lint ## Run flow checker
 cov: misc/coverage.html ## Run coverage test
 
 misc/coverage.html: $(TARGET) test.js
-	mocha --require blanket -R html-cov -t 30000 > $@
+	mocha --require blanket -R html-cov -t 60000 > $@
 
 .PHONY: coveralls
 coveralls: ## Coverage Test + Send to coveralls.io
-	mocha --require blanket --reporter mocha-lcov-reporter -t 20000 | node ./node_modules/coveralls/bin/coveralls.js
+	mocha --require blanket --reporter mocha-lcov-reporter -t 60000 | node ./node_modules/coveralls/bin/coveralls.js
 
 MDLINT=README.md
 .PHONY: mdlint
