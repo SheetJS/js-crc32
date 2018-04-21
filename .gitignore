@@ -1,4 +1,5 @@
 node_modules
+*.tgz
 test_files/*.py
 test_files/*.js
 test_files/baseline*

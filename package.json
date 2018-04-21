@@ -10,19 +10,19 @@
 	"main": "./crc32",
 	"types": "types",
 	"dependencies": {
-		"printj":"~1.1.0",
-		"exit-on-epipe":"~1.0.1"
+		"printj": "~1.1.0",
+		"exit-on-epipe": "~1.0.1"
 	},
 	"devDependencies": {
-		"mocha":"~2.5.3",
+		"mocha": "~2.5.3",
 		"blanket": "~1.2.3",
-		"codepage":"~1.10.0",
-		"@sheetjs/uglify-js":"~2.7.3",
-		"@types/node":"^8.0.7",
+		"codepage": "~1.10.0",
+		"@sheetjs/uglify-js": "~2.7.3",
+		"@types/node": "^8.0.7",
 		"dtslint": "^0.1.2",
 		"typescript": "2.2.0"
 	},
-	"repository": { "type":"git", "url":"git://github.com/SheetJS/js-crc32.git" },
+	"repository": { "type": "git", "url": "git://github.com/SheetJS/js-crc32.git" },
 	"scripts": {
 		"test": "make test",
 		"build": "make",
