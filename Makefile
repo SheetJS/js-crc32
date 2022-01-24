@@ -1,7 +1,7 @@
 LIB=crc32
 REQS=
 ADDONS=
-AUXTARGETS=demo/browser.js
+AUXTARGETS=crc32c.js demo/browser.js
 CMDS=bin/crc32.njs
 HTMLLINT=index.html
 
@@ -29,6 +29,9 @@ bits/01_version.js: package.json
 .PHONY: clean
 clean: clean-baseline ## Remove targets and build artifacts
 	rm -f $(TARGET) $(FLOWTARGET)
+
+crc32c.flow.js: crc32.flow.js
+	cat $^ | sed 's/-306674912/-2097792136/g' > $@
 
 ## Testing
 
