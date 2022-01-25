@@ -1,4 +1,4 @@
-CRC32.table = T;
+CRC32.table = T0;
 // $FlowIgnore
 CRC32.bstr = crc32_bstr;
 // $FlowIgnore

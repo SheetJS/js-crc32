@@ -1,6 +1,6 @@
 {
 	"name": "crc-32",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"author": "sheetjs",
 	"description": "Pure-JS CRC-32",
 	"keywords": [ "crc", "crc32", "checksum" ],
@@ -35,7 +35,7 @@
 			"pattern": "crc32.js"
 		}
 	},
-	"homepage": "http://sheetjs.com/opensource",
+	"homepage": "https://sheetjs.com/",
 	"files": ["crc32.js", "crc32c.js", "bin/crc32.njs", "LICENSE", "README.md", "types/index.d.ts", "types/*.json"],
 	"bugs": { "url": "https://github.com/SheetJS/js-crc32/issues" },
 	"license": "Apache-2.0",

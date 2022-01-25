@@ -31,7 +31,7 @@ clean: clean-baseline ## Remove targets and build artifacts
 	rm -f $(TARGET) $(FLOWTARGET)
 
 crc32c.flow.js: crc32.flow.js
-	cat $^ | sed 's/-306674912/-2097792136/g' > $@
+	cat $^ | sed 's/-306674912/-2097792136/g; s/CRC32\([ \/\.]\)/CRC32C\1/g' > $@
 
 ## Testing
 
