@@ -37,7 +37,7 @@ crc32c.flow.js: crc32.flow.js
 
 .PHONY: test mocha
 test mocha: test.js $(TARGET) baseline ## Run test suite
-	mocha -R spec -t 60000
+	./node_modules/.bin/mocha -R spec -t 60000
 
 .PHONY: ctest
 ctest: ## Build browser test (into ctest/ subdirectory)
@@ -65,7 +65,7 @@ fullint: lint old-lint tslint flow mdlint ## Run all checks
 
 .PHONY: lint
 lint: $(TARGET) $(AUXTARGETS) ## Run eslint checks
-	@eslint --ext .js,.njs,.json,.html,.htm $(TARGET) $(AUXTARGETS) $(CMDS) $(HTMLLINT) package.json bower.json
+	@eslint --ext .js,.njs,.json,.html,.htm $(TARGET) $(AUXTARGETS) $(CMDS) $(HTMLLINT) package.json
 	if [ -e $(CLOSURE) ]; then java -jar $(CLOSURE) $(REQS) $(FLOWTARGET) --jscomp_warning=reportUnknownTypes >/dev/null; fi
 
 .PHONY: old-lint
@@ -91,11 +91,11 @@ flow: lint ## Run flow checker
 cov: misc/coverage.html ## Run coverage test
 
 misc/coverage.html: $(TARGET) test.js
-	mocha --require blanket -R html-cov -t 60000 > $@
+	./node_modules/.bin/mocha --require blanket -R html-cov -t 60000 > $@
 
 .PHONY: coveralls
 coveralls: ## Coverage Test + Send to coveralls.io
-	mocha --require blanket --reporter mocha-lcov-reporter -t 60000 | node ./node_modules/coveralls/bin/coveralls.js
+	./node_modules/.bin/mocha --require blanket --reporter mocha-lcov-reporter -t 60000 | node ./node_modules/coveralls/bin/coveralls.js
 
 MDLINT=README.md
 .PHONY: mdlint
