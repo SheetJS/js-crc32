@@ -181,7 +181,7 @@ $ crc32 --unsigned ~/Downloads/IE8.Win7.For.Windows.VMware.zip
 `make perf` will run algorithmic performance tests (which should justify certain
 decisions in the code).
 
-The [`adler-32` project](http://git.io/adler32) has more performance notes
+The [`adler-32` project](https://github.com/SheetJS/js-adler32) has more performance notes
 
 ## License
 
