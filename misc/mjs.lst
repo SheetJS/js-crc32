@@ -1,0 +1,6 @@
+misc/00_header.js
+bits/01_version.js
+bits/10_types.js
+bits/20_crctable.js
+bits/40_crc.js
+misc/99_footer.js

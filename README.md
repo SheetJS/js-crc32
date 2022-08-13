@@ -28,10 +28,16 @@ checksum for a specified file or standard input.
 
 ## Integration
 
-Using NodeJS or a bundler:
+Using NodeJS or a bundler with `require`:
 
 ```js
 var CRC32 = require("crc-32");
+```
+
+Using NodeJS or a bundler with `import`:
+
+```js
+import { bstr, buf, str } from "crc-32";
 ```
 
 In the browser, the `crc32.js` script can be loaded directly:
@@ -55,6 +61,12 @@ Using NodeJS or a bundler:
 var CRC32C = require("crc-32/crc32c");
 ```
 
+Using NodeJS or a bundler with `import`:
+
+```js
+import { bstr, buf, str } from "crc-32/crc32c";
+```
+
 In the browser, the `crc32c.js` script can be loaded directly:
 
 ```html
@@ -71,7 +83,7 @@ desirable.  To prevent the behavior, define `DO_NOT_EXPORT_CRC`.
 In all cases, the relevant function takes an argument representing data and an
 optional second argument representing the starting "seed" (for rolling CRC).
 
-The return value is a signed 32-bit integer.
+**The return value is a signed 32-bit integer!**
 
 - `CRC32.buf(byte array or buffer[, seed])` assumes the argument is a sequence
   of 8-bit unsigned integers (nodejs `Buffer`, `Uint8Array` or array of bytes).
@@ -129,6 +141,25 @@ crc32 = CRC32.buf(Buffer.from(bstr, "binary"), 0);
 
 This does not apply to browser `Buffer` shims, and thus is not implemented in
 the library directly.
+
+### Signed Integers
+
+Unconventional for a CRC32 checksum, this library uses signed 32-bit integers.
+This is for performance reasons.  Standard JS operators can convert between
+signed and unsigned 32-bit integers:
+
+```js
+CRC32.str("SheetJS")                            // -1647298270 (signed)
+CRC32.str("SheetJS") >>> 0                      //  2647669026 (unsigned)
+(CRC32.str("SheetJS")>>>0).toString(16)         //  "9dd03922" (hex)
+
+(2647669026 | 0)                                // -1647298270
+```
+
+- `x >>> 0` converts a number value to unsigned 32-bit integer.
+
+- `x | 0` converts a number value to signed 32-bit integer.
+
 
 ## Testing
 

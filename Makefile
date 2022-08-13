@@ -12,15 +12,21 @@ FLOWTARGET=$(LIB).flow.js
 FLOWTGTS=$(TARGET) $(AUXTARGETS)
 CLOSURE=/usr/local/lib/node_modules/google-closure-compiler/compiler.jar
 
+ESMJSTGT=crc32.mjs
+ESMJSDEPS=$(shell cat misc/mjs.lst)
+
 ## Main Targets
 
 .PHONY: all
-all: $(TARGET) $(AUXTARGETS) ## Build library and auxiliary scripts
+all: $(TARGET) $(AUXTARGETS) $(ESMJSTGT) crc32c.mjs ## Build library and auxiliary scripts
 
 $(FLOWTGTS): %.js : %.flow.js
 	node -e 'process.stdout.write(require("fs").readFileSync("$<","utf8").replace(/^[ \t]*\/\*[:#][^*]*\*\/\s*(\n)?/gm,"").replace(/\/\*[:#][^*]*\*\//gm,""))' > $@
 
 $(FLOWTARGET): $(DEPS)
+	cat $^ | tr -d '\15\32' > $@
+
+$(ESMJSTGT): $(ESMJSDEPS)
 	cat $^ | tr -d '\15\32' > $@
 
 bits/01_version.js: package.json
@@ -31,6 +37,9 @@ clean: clean-baseline ## Remove targets and build artifacts
 	rm -f $(TARGET) $(FLOWTARGET)
 
 crc32c.flow.js: crc32.flow.js
+	cat $^ | sed 's/-306674912/-2097792136/g; s/CRC32\([ \/\.]\)/CRC32C\1/g' > $@
+
+crc32c.mjs: crc32.mjs
 	cat $^ | sed 's/-306674912/-2097792136/g; s/CRC32\([ \/\.]\)/CRC32C\1/g' > $@
 
 ## Testing
