@@ -23,7 +23,7 @@ var CRC32C;
 	/*eslint-enable */
 	/*jshint ignore:end */
 }(function(CRC32C) {
-CRC32C.version = '1.2.2';
+CRC32C.version = '1.2.3';
 /*global Int32Array */
 function signed_crc_table() {
 	var c = 0, table = new Array(256);

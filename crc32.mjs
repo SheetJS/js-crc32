@@ -1,7 +1,7 @@
 /*! crc32.js (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
 var CRC32 = {};
-CRC32.version = '1.2.2';
+CRC32.version = '1.2.3';
 /*::
 type CRC32Type = number;
 type ABuf = Array<number> | Buffer | Uint8Array;

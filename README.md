@@ -5,26 +5,21 @@ Emphasis on correctness, performance, and IE6+ support.
 
 ## Installation
 
-With [npm](https://www.npmjs.org/package/crc-32):
+With a node package manager like `npm`:
 
 ```bash
-$ npm install crc-32
+$ npm i --save https://cdn.sheetjs.com/crc-32-latest/crc-32-latest.tgz
 ```
 
 When installed globally, npm installs a script `crc32` that computes the
 checksum for a specified file or standard input.
 
-<details>
-  <summary><b>CDN Availability</b> (click to show)</summary>
+Hosted versions are available at <https://cdn.sheetjs.com/>:
 
-|    CDN     | URL                                        |
-|-----------:|:-------------------------------------------|
-|    `unpkg` | <https://unpkg.com/crc-32/>                |
-| `jsDelivr` | <https://jsdelivr.com/package/npm/crc-32>  |
-|    `CDNjs` | <https://cdnjs.com/libraries/crc-32>       |
-
-</details>
-
+- `crc32.js` (CommonJS): <https://cdn.sheetjs.com/crc-32-latest/package/crc32.js>
+- `crc32.mjs` (ESM): <https://cdn.sheetjs.com/crc-32-latest/package/crc32.mjs>
+- `crc32c.js` (CommonJS): <https://cdn.sheetjs.com/crc-32-latest/package/crc32c.js>
+- `crc32c.mjs` (ESM): <https://cdn.sheetjs.com/crc-32-latest/package/crc32c.mjs>
 
 ## Integration
 

@@ -25,7 +25,7 @@ var CRC32C/*:CRC32Module*/;
 	/*eslint-enable */
 	/*jshint ignore:end */
 }(function(CRC32C/*:CRC32Module*/) {
-CRC32C.version = '1.2.2';
+CRC32C.version = '1.2.3';
 /*::
 type CRC32Type = number;
 type ABuf = Array<number> | Buffer | Uint8Array;
