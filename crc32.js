@@ -68,7 +68,11 @@ function crc32_bstr(bstr, seed) {
 }
 
 function crc32_buf(B, seed) {
-	var C = seed ^ -1, L = B.length - 15, i = 0;
+  return crc32_bufrange(B, 0, B.length, seed);
+}
+
+function crc32_bufrange(B, start, end, seed) {
+	var C = seed ^ -1, L = end - start - 15, i = 0;
 	for(; i < L;) C =
 		Tf[B[i++] ^ (C & 255)] ^
 		Te[B[i++] ^ ((C >> 8) & 255)] ^
@@ -110,6 +114,8 @@ CRC32.table = T0;
 CRC32.bstr = crc32_bstr;
 // $FlowIgnore
 CRC32.buf = crc32_buf;
+// $FlowIgnore
+CRC32.bufrange = crc32_bufrange;
 // $FlowIgnore
 CRC32.str = crc32_str;
 }));

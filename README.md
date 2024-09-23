@@ -32,7 +32,7 @@ var CRC32 = require("crc-32");
 Using NodeJS or a bundler with `import`:
 
 ```js
-import { bstr, buf, str } from "crc-32";
+import { bstr, buf, bufrange, str } from "crc-32";
 ```
 
 In the browser, the `crc32.js` script can be loaded directly:
@@ -59,7 +59,7 @@ var CRC32C = require("crc-32/crc32c");
 Using NodeJS or a bundler with `import`:
 
 ```js
-import { bstr, buf, str } from "crc-32/crc32c";
+import { bstr, buf, bufrange, str } from "crc-32/crc32c";
 ```
 
 In the browser, the `crc32c.js` script can be loaded directly:
@@ -83,6 +83,11 @@ optional second argument representing the starting "seed" (for rolling CRC).
 - `CRC32.buf(byte array or buffer[, seed])` assumes the argument is a sequence
   of 8-bit unsigned integers (nodejs `Buffer`, `Uint8Array` or array of bytes).
 
+- `CRC32.bufrange(byte array or buffer, start, end, [, seed])` assumes the first argument is a sequence
+  of 8-bit unsigned integers (nodejs `Buffer`, `Uint8Array` or array of bytes), the second argument marks
+  the start index (inclusive) and the third argument marks the end index (exclusive) of the range to read
+  from the buffer.
+
 - `CRC32.bstr(binary string[, seed])` assumes the argument is a binary string
   where byte `i` is the low byte of the UCS-2 char: `str.charCodeAt(i) & 0xFF`
 
@@ -96,6 +101,7 @@ For example:
 CRC32.str("SheetJS")                            // -1647298270
 CRC32.bstr("SheetJS")                           // -1647298270
 CRC32.buf([ 83, 104, 101, 101, 116, 74, 83 ])   // -1647298270
+CRC32.bufrange([ 83, 104, 101, 101, 74 ], 1, 2) // -1826163454
 
 crc32 = CRC32.buf([83, 104])                    // -1826163454  "Sh"
 crc32 = CRC32.str("eet", crc32)                 //  1191034598  "Sheet"
@@ -108,7 +114,6 @@ CRC32.bstr("JS", crc32)                         // -1647298270  "SheetJS"
 // var CRC32C = require('crc-32/crc32c');       // uncomment this line if in node
 CRC32C.str("SheetJS")                           // -284764294
 CRC32C.bstr("SheetJS")                          // -284764294
-CRC32C.buf([ 83, 104, 101, 101, 116, 74, 83 ])  // -284764294
 
 crc32c = CRC32C.buf([83, 104])                  // -297065629   "Sh"
 crc32c = CRC32C.str("eet", crc32c)              //  1241364256  "Sheet"
